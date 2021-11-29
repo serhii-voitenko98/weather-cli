@@ -3,6 +3,10 @@ import { printError, printHelp, printSuccess } from "./services/log.service.js";
 import { saveKeyValue } from "./services/storage.service.js";
 
 const saveToken = async token => {
+    if (!token.trim().length) {
+        return printError('Token is required!');
+    }
+
     try {
         await saveKeyValue('token', token);
         printSuccess('Token has been saved!');
@@ -12,6 +16,10 @@ const saveToken = async token => {
 };
 
 const saveCity = async city => {
+    if (!city.trim().length) {
+        return printError('City is required!');
+    }
+
     try {
         await saveKeyValue('city', city);
         printSuccess('City has been saved!');
