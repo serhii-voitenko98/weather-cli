@@ -1,5 +1,6 @@
 import chalk from 'chalk';
-import dedent from "../helpers/dedent.js";
+import dedent from "dedent";
+import { getWeatherIcon } from "../helpers/get-icon.js";
 
 const printError = message => {
     console.log(chalk.bgRed(' ERROR ') + ' ' + message);
@@ -20,4 +21,18 @@ const printHelp = () => {
     );
 };
 
-export { printError, printSuccess, printHelp };
+const printWeather = (data) => {
+    console.log(
+        dedent`${chalk.bgBlue(' WEATHER ')} Weather in ${data.country}, ${data.city}.
+        ${getWeatherIcon(data.icon)}  ${data.description}
+        Temperature: ${data.temperature.value}°C feels like ${data.temperature.feels_like}°C
+        Pressure: ${data.pressure}
+        Humidity: ${data.humidity}
+        Wind speed: ${data.wind_speed} m/s
+        Sunrise: ${new Date(data.sunrise)}
+        Sunset: ${new Date(data.sunset)}
+        `
+    );
+};
+
+export { printError, printSuccess, printHelp, printWeather };
